@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
 
@@ -102,6 +103,21 @@ def calculate_reynolds(data):
     reynolds_number = (density * velocity * diameter) / viscosity
 
     return f"Reynolds number: {round(reynolds_number, 4)}"
+
+
+@app.route('/update_hook', methods=['POST'])
+def update_code():
+    """
+    Webhook endpoint for GitHub. Pulls the latest code when triggered.
+    """
+    # Verify the request (optional but recommended)
+    secret = "testing"  # Use the same secret you set in the webhook
+    if not request.headers.get('X-Hub-Signature-256'):
+        return "Unauthorized", 403
+
+    # Run the update script
+    os.system("/home/roadrunner38/update_engineering_app.sh")
+    return "Code updated", 200
 
 
 if __name__ == '__main__':
