@@ -28,7 +28,7 @@ def reynolds_number():
             result = (density * velocity * length) / viscosity
         except ValueError:
             result = "Invalid input. Please enter valid numbers."
-    return render_template("reynolds.html", result=result)
+    return render_template("reynolds_number.html", result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)
