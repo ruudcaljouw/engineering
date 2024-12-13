@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Ocean Wave Energy Calculator{% endblock %}
+
+{% block content %}
+<div class="calculator-page">
+    <!-- Left column for explanation and image -->
+    <div class="left-column">
+        <h2>Ocean Wave Energy Calculator</h2>
+        <p>The energy in an ocean wave is calculated as:</p>
+        <p><strong>Formula:</strong> E = (1/8) × ρ × g × H²</p>
+        <ul>
+            <li><strong>ρ</strong>: Fluid density (kg/m³)</li>
+            <li><strong>g</strong>: Acceleration due to gravity (m/s²)</li>
+            <li><strong>H</strong>: Wave height (m)</li>
+        </ul>
+        <img src="{{ url_for('static', filename='images/wave_energy.png') }}" alt="Wave Energy Diagram">
+    </div>
+    
+    <!-- Right column for the calculator form -->
+    <div class="right-column">
+        <h3>Calculate Wave Energy</h3>
+        <form method="POST">
+            <label for="density">Fluid Density (ρ) [kg/m³]:</label>
+            <input type="number" id="density" name="density" step="any" required>
+            <br><br>
+
+            <label for="wave_height">Wave Height (H) [m]:</label>
+            <input type="number" id="wave_height" name="wave_height" step="any" required>
+            <br><br>
+
+            <button type="submit">Calculate</button>
+        </form>
+        
+        {% if result is not none %}
+            <h3>Result: E = {{ result }} J/m²</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
