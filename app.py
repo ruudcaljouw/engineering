@@ -1,3 +1,12 @@
+
+
+""" to do
+1. Format homepage ( panels)
+2. Format calculator page (panels)
+
+"""
+
+
 import os
 from flask import Flask, render_template, request
 
@@ -6,53 +15,79 @@ app = Flask(__name__)
 # Homepage route
 @app.route("/")
 def home():
-    return render_template("base.html")  # Render the base template for the homepage
+    return render_template("home.html")
 
-# Fluid Dynamics calculators page route
+# Fluid Dynamics category
 @app.route("/fluid-dynamics")
 def fluid_dynamics():
-    return render_template("fluid_dynamics.html")  # Render the Fluid Dynamics page
+    return render_template("fluid_dynamics/overview.html")
 
-# Reynolds Number Calculator page route
 @app.route("/fluid-dynamics/reynolds-number", methods=["GET", "POST"])
 def reynolds_number():
     result = None
     if request.method == "POST":
         try:
-            # Retrieve inputs
-            density = float(request.form["density"])  # ρ: Fluid density
-            velocity = float(request.form["velocity"])  # v: Fluid velocity
-            length = float(request.form["length"])  # L: Characteristic length
-            viscosity = float(request.form["viscosity"])  # μ: Dynamic viscosity
-
-            # Perform Reynolds number calculation
+            density = float(request.form["density"])
+            velocity = float(request.form["velocity"])
+            length = float(request.form["length"])
+            viscosity = float(request.form["viscosity"])
             result = (density * velocity * length) / viscosity
         except ValueError:
             result = "Invalid input. Please enter valid numbers."
-    return render_template("reynolds_number.html", result=result)
+    return render_template("fluid_dynamics/reynolds.html", result=result)
 
+@app.route("/fluid-dynamics/another-calculator")
+def another_fluid_dynamics_calculator():
+    return render_template("fluid_dynamics/another_calculator.html")
 
-# Wave Energy calculators page route
+# Wave Energy category
 @app.route("/wave-energy")
 def wave_energy():
-    return render_template("wave_energy.html")  # Render the Wave Energy page
+    return render_template("wave_energy/overview.html")
 
-# Ocean Wave Energy Calculator page route
-@app.route("/wave-energy/ocean-wave-energy", methods=["GET", "POST"])
-def ocean_wave_energy():
+@app.route("/wave-energy/wave-energy", methods=["GET", "POST"])
+def wave_energy_calculator():
     result = None
+    default_density = 1025  # Prefilled water density
+    default_gravity = 9.81  # Prefilled acceleration due to gravity
     if request.method == "POST":
         try:
-            # Retrieve inputs
-            density = float(request.form["density"])  # ρ: Density of seawater
-            wave_height = float(request.form["wave_height"])  # H: Wave height
-            
-            # Perform the energy calculation
-            g = 9.8  # Acceleration due to gravity (m/s²)
-            result = (1/8) * density * g * wave_height**2
+            density = float(request.form.get("density", default_density))
+            gravity = float(request.form.get("gravity", default_gravity))
+            height = float(request.form["height"])  # H_s: Significant wave height
+            # Wave energy calculation
+            result = (1/8) * density * gravity * (height ** 2)  # Result in J/m²
         except ValueError:
             result = "Invalid input. Please enter valid numbers."
-    return render_template("ocean_wave_energy.html", result=result)
+    return render_template("wave_energy/wave_energy.html", result=result, default_density=default_density, default_gravity=default_gravity)
+
+
+@app.route("/wave-energy/wave-power", methods=["GET", "POST"])
+def wave_power():
+    result = None
+    default_density = 1025  # Prefilled water density
+    default_gravity = 9.81  # Prefilled acceleration due to gravity
+    if request.method == "POST":
+        try:
+            density = float(request.form.get("density", default_density))
+            gravity = float(request.form.get("gravity", default_gravity))
+            period = float(request.form["period"])  # T_e: Energetic wave period
+            height = float(request.form["height"])  # H_s: Significant wave height
+            import math
+            # Wave power calculation in watts (W)
+            wave_power_watts = (density * (gravity ** 2) * period * (height ** 2)) / (64 * math.pi)
+            # Convert to kilowatts (kW)
+            result = wave_power_watts / 1000
+        except ValueError:
+            result = "Invalid input. Please enter valid numbers."
+    return render_template("wave_energy/wave_power.html", result=result, default_density=default_density, default_gravity=default_gravity)
+
+
+@app.route("/wave-energy/another-calculator")
+def another_wave_energy_calculator():
+    return render_template("wave_energy/another_calculator.html")
+
+
 
 
 @app.route('/update_hook', methods=['POST'])

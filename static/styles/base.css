@@ -1,0 +1,128 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Header and Navbar Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Styling */
+main {
+    padding: 20px;
+}
+
+/* Page-Specific Layout for Calculators */
+.calculator-page {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.left-column, .right-column {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.left-column {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.left-column img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.right-column {
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+/* Form Styling */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+form input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Result Styling */
+h3 {
+    margin-top: 20px;
+    color: green;
+}
+
+/* Footer (Optional for Future Use) */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+}

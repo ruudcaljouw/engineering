@@ -1,0 +1,42 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Wave Power Calculator{% endblock %}
+
+{% block content %}
+<div class="calculator-page">
+    <div class="left-column">
+        <h2>Wave Power Calculation</h2>
+        <p>
+            \[
+            P = \frac{\rho \cdot g^2 \cdot T_e \cdot H_s^2}{64 \cdot \pi}
+            \]
+        </p>
+        <ul>
+            <li>\( \rho \): Water density (kg/m³)</li>
+            <li>\( g \): Acceleration due to gravity (m/s²)</li>
+            <li>\( T_e \): Energetic wave period (seconds)</li>
+            <li>\( H_s \): Significant wave height (meters)</li>
+        </ul>
+    </div>
+    <div class="right-column">
+        <form method="POST">
+            <label for="density">Water Density (\( \rho \)) [kg/m³]:</label>
+            <input type="number" id="density" name="density" value="{{ default_density }}" step="any" required>
+
+            <label for="gravity">Gravity (\( g \)) [m/s²]:</label>
+            <input type="number" id="gravity" name="gravity" value="{{ default_gravity }}" step="any" required>
+
+            <label for="period">Energetic Wave Period (\( T_e \)) [seconds]:</label>
+            <input type="number" id="period" name="period" step="any" required>
+
+            <label for="height">Significant Wave Height (\( H_s \)) [meters]:</label>
+            <input type="number" id="height" name="height" step="any" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+        {% if result %}
+        <h3>Result: \( P = {{ result|round(1) }} \, \text{kW/m} \)</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

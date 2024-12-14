@@ -1,0 +1,28 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Reynolds Number Calculator{% endblock %}
+
+{% block content %}
+<div class="calculator-page">
+    <div class="left-column">
+        <h2>Reynolds Number</h2>
+        <p>Formula: Re = (ρ × v × L) / μ</p>
+    </div>
+    <div class="right-column">
+        <form method="POST">
+            <label for="density">Density (ρ):</label>
+            <input type="number" id="density" name="density" required>
+            <label for="velocity">Velocity (v):</label>
+            <input type="number" id="velocity" name="velocity" required>
+            <label for="length">Length (L):</label>
+            <input type="number" id="length" name="length" required>
+            <label for="viscosity">Viscosity (μ):</label>
+            <input type="number" id="viscosity" name="viscosity" required>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if result %}
+        <h3>Result: Re = {{ result }}</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
