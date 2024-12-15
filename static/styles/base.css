@@ -348,3 +348,21 @@ footer {
     position: relative; /* Allows the footer to stay below the main content */
     bottom: 0;
 }
+
+/* Prevent overflow for MathJax-rendered formulas */
+.left-column {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.left-column p, .left-column ul {
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+}
+
+.mathjax-equation {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+    text-align: left;
+}
