@@ -1,12 +1,23 @@
-{% extends "layouts/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h2>Welcome to the Calculator App</h2>
-<p>This app offers various calculators, grouped into categories:</p>
-<ul>
-    <li><a href="/fluid-dynamics">Fluid Dynamics</a></li>
-    <li><a href="/wave-energy">Wave Energy</a></li>
-</ul>
+<div class="hero-section">
+    <h2>Welcome to the Calculator App</h2>
+    <p>Discover powerful tools for engineering calculations!</p>
+</div>
+
+<div class="category-cards">
+    <div class="card">
+        <h3>Fluid Dynamics</h3>
+        <p>Explore calculators for fluid mechanics, including Reynolds Number calculations.</p>
+        <a href="/fluid-dynamics" class="card-button">Explore</a>
+    </div>
+    <div class="card">
+        <h3>Wave Energy</h3>
+        <p>Analyze wave energy and power with specialized tools for marine engineering.</p>
+        <a href="/wave-energy" class="card-button">Explore</a>
+    </div>
+</div>
 {% endblock %}

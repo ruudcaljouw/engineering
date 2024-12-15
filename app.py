@@ -3,9 +3,11 @@
 """ to do
 1. Format homepage ( panels)
 2. Format calculator page (panels)
+3. Publish on real page
+4. License
+5. Income model
 
 """
-
 
 import os
 from flask import Flask, render_template, request
@@ -36,9 +38,43 @@ def reynolds_number():
             result = "Invalid input. Please enter valid numbers."
     return render_template("fluid_dynamics/reynolds.html", result=result)
 
-@app.route("/fluid-dynamics/another-calculator")
-def another_fluid_dynamics_calculator():
-    return render_template("fluid_dynamics/another_calculator.html")
+@app.route("/fluid-dynamics/k-epsilon", methods=["GET", "POST"])
+def k_epsilon():
+    result = None
+    if request.method == "POST":
+        try:
+            u_ref = float(request.form["u_ref"])
+            turb_intensity = float(request.form["turb_intensity"]) / 100  # Convert percentage to fraction
+            length_scale = float(request.form["length_scale"])
+            
+            # Calculations
+            k = (3 / 2) * (u_ref * turb_intensity) ** 2
+            C_mu = 0.09
+            epsilon = (C_mu ** (3 / 4)) * (k ** (3 / 2)) / length_scale
+            
+            result = f"Turbulent kinetic energy (k): {round(k, 4)} m²/s² <br> Dissipation rate (ε): {round(epsilon, 4)} m²/s³"
+        except ValueError:
+            result = "Invalid input. Please enter valid numbers."
+    return render_template("fluid_dynamics/k_epsilon.html", result=result)
+
+@app.route("/fluid-dynamics/k-omega", methods=["GET", "POST"])
+def k_omega():
+    result = None
+    if request.method == "POST":
+        try:
+            u_ref = float(request.form["u_ref"])
+            turb_intensity = float(request.form["turb_intensity"]) / 100  # Convert percentage to fraction
+            length_scale = float(request.form["length_scale"])
+            
+            # Calculations
+            k = (3 / 2) * (u_ref * turb_intensity) ** 2
+            omega = k / (length_scale ** 2)
+            
+            result = f"Turbulent kinetic energy (k): {round(k, 4)} m²/s² <br> Specific dissipation rate (ω): {round(omega, 4)} s⁻¹"
+        except ValueError:
+            result = "Invalid input. Please enter valid numbers."
+    return render_template("fluid_dynamics/k_omega.html", result=result)
+
 
 # Wave Energy category
 @app.route("/wave-energy")

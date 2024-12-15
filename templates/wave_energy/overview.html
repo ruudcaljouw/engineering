@@ -1,12 +1,26 @@
-{% extends "layouts/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Wave Energy Calculators{% endblock %}
 
 {% block content %}
-<h2>Wave Energy Calculators</h2>
-<ul>
-    <li><a href="/wave-energy/wave-energy">Wave Energy Calculator</a></li>
-    <li><a href="/wave-energy/wave-power">Wave Power Calculator</a></li>
-    <li><a href="/wave-energy/another-calculator">Another Wave Energy Calculator</a></li>
-</ul>
+<div class="category-page">
+    <h2>Wave Energy</h2>
+    <div class="panels">
+        <div class="panel">
+            <h3>Wave Energy</h3>
+            <p>Estimate wave energy using significant wave height and density.</p>
+            <a href="/wave-energy/wave-energy" class="panel-button">Open Calculator</a>
+        </div>
+        <div class="panel">
+            <h3>Wave Power</h3>
+            <p>Determine the power of ocean waves with advanced formulas.</p>
+            <a href="/wave-energy/wave-power" class="panel-button">Open Calculator</a>
+        </div>
+        <div class="panel">
+            <h3>Another Wave Energy Calculator</h3>
+            <p>Additional tools for specialized wave energy calculations.</p>
+            <a href="/wave-energy/another-calculator" class="panel-button">Open Calculator</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
