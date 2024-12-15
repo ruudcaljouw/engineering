@@ -322,3 +322,29 @@ footer {
 .panel-button:hover {
     background-color: #0056b3;
 }
+
+/* Ensure the page takes up the full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content area should expand to fill available space */
+main {
+    flex: 1; /* This pushes the footer to the bottom when the content is short */
+    padding: 20px;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    position: relative; /* Allows the footer to stay below the main content */
+    bottom: 0;
+}

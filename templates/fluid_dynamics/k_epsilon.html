@@ -4,23 +4,42 @@
 
 {% block content %}
 <div class="calculator-page">
-    <h2>K-Epsilon Turbulence Model</h2>
-    <form method="POST">
-        <label for="u_ref">Reference Velocity (\( U_{\text{ref}} \)) [m/s]:</label>
-        <input type="number" id="u_ref" name="u_ref" step="any" required>
+    <div class="left-column">
+        <h2>K-Epsilon Turbulence Model</h2>
+        <p>This calculator computes the following:</p>
+        <ul>
+            <li>
+                Turbulent kinetic energy (\( k \)):
+                \[
+                k = \frac{3}{2} (U_{\text{ref}} \cdot \text{Turbulence Intensity})^2
+                \]
+            </li>
+            <li>
+                Dissipation rate (\( \epsilon \)):
+                \[
+                \epsilon = \frac{C_\mu^{3/4} \cdot k^{3/2}}{\text{Length Scale}}
+                \]
+                where \( C_\mu = 0.09 \).
+            </li>
+        </ul>
+    </div>
+    <div class="right-column">
+        <form method="POST">
+            <label for="u_ref">Reference Velocity (\( U_{\text{ref}} \)) [m/s]:</label>
+            <input type="number" id="u_ref" name="u_ref" step="any" required>
 
-        <label for="turb_intensity">Turbulence Intensity [%]:</label>
-        <input type="number" id="turb_intensity" name="turb_intensity" step="any" required>
+            <label for="turb_intensity">Turbulence Intensity [%]:</label>
+            <input type="number" id="turb_intensity" name="turb_intensity" step="any" required>
 
-        <label for="length_scale">Length Scale [m]:</label>
-        <input type="number" id="length_scale" name="length_scale" step="any" required>
+            <label for="length_scale">Length Scale [m]:</label>
+            <input type="number" id="length_scale" name="length_scale" step="any" required>
 
-        <button type="submit">Calculate</button>
-    </form>
-
-    {% if result %}
-    <h3>Result:</h3>
-    <p>{{ result|safe }}</p>
-    {% endif %}
+            <button type="submit">Calculate</button>
+        </form>
+        {% if result %}
+        <h3>Result:</h3>
+        <p>{{ result|safe }}</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
